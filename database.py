@@ -25,6 +25,13 @@ GET_BY_100_500 = """
 SELECT * FROM market 
 WHERE price BETWEEN 100 AND 500"""
 
+
+
+GET_BY_RANGE = """
+SELECT * FROM market
+WHERE price = ?, price = ?"""
+
+
 UPDATE_PRODUCT_NAME = "UPDATE market SET name = ? WHERE name = ?"
 
 UPDATE_PRODUCT_ID = "UPDATE market SET id = ? WHERE name = ?"
@@ -67,13 +74,13 @@ def get_price_for_product(connection,name):
         with connection:
             return connection.execute(GET_PRICE_FOR_PRODUCT,(name,)).fetchone()
 
-def get_by_greatthan(connection, price):
-    with connection:
-        return connection.execute(GET_BY_GREATER_THAN, (price,)).fetchall()
 
-def get_by_lowerthan(connection, price):
+
+def get_by_range(connection, price, price1):
     with connection:
-        return connection.execute(GET_BY_LOWER_THAN, (price,)).fetchall()
+        return connection(GET_BY_RANGE,(price, price1)).fetchall()
+
+
 
 def get_by_range100(connection):
     with connection:

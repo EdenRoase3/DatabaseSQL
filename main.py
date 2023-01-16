@@ -135,6 +135,15 @@ try:
                 products = database.order_by_price_lowtohigh(connection)
                 for product in products: 
                     print("\n" + f" Product {product[1]} - Price {product[5]}$")
+
+
+            elif user_input == "17":
+                price = input("Search for a price greater than: ")
+                price1 = input("Please enter another price lower than: ")
+                products = database.get_by_range(connection, price, price1)
+                for product in products: 
+                    print("\n" + f" Product {product[1]} - Price {product[5]}$")
+                
                 
             else:
                 print("Please enter a correct input. Please try again!")
